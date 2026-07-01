@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачник</title>
+</head>
+<body>
+<h1>Создание задачи</h1>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Создать</button>
+</form>
+<p><a href="{% url 'task_list' %}">В главное меню</a></p>
+</body>
+</html>
