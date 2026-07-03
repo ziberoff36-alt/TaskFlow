@@ -7,6 +7,7 @@
     <title>Задачник</title>
 </head>
 <body>
+<div class="container">
 {% if tasks %}
     <table>
         <tr>
@@ -28,5 +29,6 @@
     <p>Пока ничего нет</p>
 {% endif %}
 <a href="{% url 'task_create' %}">Создать задачу</a>
+</div>
 </body>
 </html>
