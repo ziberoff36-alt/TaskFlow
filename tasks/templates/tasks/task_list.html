@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'tasks/style.css' %}">
     <title>Задачник</title>
 </head>
 <body>
-<h1>Задачи</h1>
 {% if tasks %}
     <table>
         <tr>
