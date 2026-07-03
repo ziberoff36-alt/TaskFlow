@@ -1,0 +1,21 @@
+body {
+    background-color: #FAEBD7;
+}
+table {
+    width: 60%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+th {
+    background-color: #FFE4C4;
+    font-weight: bold;
+}
+td {
+    background-color : #FFEBCD;
+}
+.container {
+    margin: 40px;
+}
