@@ -15,6 +15,7 @@
             <th>Статус</th>
             <th>Категория</th>
             <th>Создано</th>
+            <th>Действия</th>
         </tr>
         {% for task in tasks %}
         <tr>
@@ -24,6 +25,7 @@
             </td>
             <td>{% if task.category %} {{task.category}} {% else %} Без категории {% endif %}</td>
             <td>{{task.created_at|date:'d.m.Y H:i' }}</td>
+            <td><a href="{% url 'task_update' task.pk %}">Изменить</a></td>
         </tr>
         {% endfor %}
     </table>
