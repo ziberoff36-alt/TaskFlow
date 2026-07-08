@@ -33,9 +33,6 @@ a {
 a:hover {
     background-color: #FFDAB9;
 }
-.status-new {
-    color: #f01616;
-}
 status.status-progress {
     color: #FFFF00;
 }
