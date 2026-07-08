@@ -20,6 +20,11 @@ class TaskCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title_name'] = 'Создание задачи'
+        context['button_text'] = 'Создать'
+        return context
 
 class TaskUpdateView(LoginRequiredMixin,UpdateView):
     model = Task
@@ -31,3 +36,8 @@ class TaskUpdateView(LoginRequiredMixin,UpdateView):
         return super().form_valid(form)
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title_name'] = 'Изменение задачи'
+        context['button_text'] = 'Сохранить'
+        return context
