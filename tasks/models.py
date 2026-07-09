@@ -2,7 +2,21 @@ from django.db import models
 from config import settings
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False,
+        related_name='categories'
+    )
+    name = models.CharField(max_length=100)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'name'],
+                name='unique_category_per_user'
+            )
+        ]
     def __str__(self):
         return self.name
 
