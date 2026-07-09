@@ -1,5 +1,6 @@
 from django import forms
-from tasks.models import Task
+from tasks.models import Task, Category
+
 
 class TaskForm(forms.ModelForm):
     class Meta:
@@ -18,3 +19,10 @@ class TaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['category'].empty_label = 'Не выбрано'
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name',]
+        labels = {
+            'name': 'Название'
+        }

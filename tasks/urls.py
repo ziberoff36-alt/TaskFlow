@@ -6,4 +6,5 @@ urlpatterns = [
     path('create/', TaskCreateView.as_view(), name='task_create'),
     path('update/<int:pk>/', TaskUpdateView.as_view(), name='task_update'),
     path('delete/<int:pk>/', TaskDeleteView.as_view(), name='task_delete'),
+    path('category/create/', CategoryCreateView.as_view(), name='category_create'),
 ]

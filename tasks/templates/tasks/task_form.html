@@ -7,12 +7,13 @@
     <title>Задачник</title>
 </head>
 <body>
-<h1>{{ title_name }}</h1>
+<h1>{{title_name}} {% if object.title %} "{{object.title}}" {% endif %}</h1>
 <form method="post">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit">{{ button_text }}</button>
 </form>
-<p><a href="{% url 'task_list' %}">В главное меню</a></p>
+<a href="{% url 'task_list' %}">В главное меню</a>
+<a href="{% url 'category_create' %}?next={{ request.path }}">Создать категорию</a>
 </body>
 </html>
