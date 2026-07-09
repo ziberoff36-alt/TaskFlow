@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'tasks/task_form.css' %}">
+    <title>Задачник</title>
+</head>
+<body>
+<h1>Вы уверены, что хотите удалить задачу "{{object.title}}"?</h1>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Да, удалить окончательно</button>
+    <a href="{% url 'task_list' %}">Отмена</a>
+</form>
+</body>
+</html>
