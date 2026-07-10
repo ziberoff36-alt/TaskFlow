@@ -49,6 +49,13 @@ class TaskDeleteView(LoginRequiredMixin,DeleteView):
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
 
+class CategoryListView(LoginRequiredMixin,ListView):
+    model = Category
+    template_name = 'tasks/category_list.html'
+    context_object_name = 'categories'
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
+
 class CategoryCreateView(LoginRequiredMixin,CreateView):
     model = Category
     form_class = CategoryForm

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'tasks/task_list.css' %}">
+    <title>Задачник</title>
+</head>
+<body>
+<div class="container">
+  {% if categories %}
+  <table>
+    <tr>
+      <th>Категория</th>
+    </tr>
+    {% for category in categories %}
+    <tr>
+      <td>{{category.name}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+<a href="{% url 'task_list' %}">В главное меню</a>
+</div>
+</body>
+</html>
