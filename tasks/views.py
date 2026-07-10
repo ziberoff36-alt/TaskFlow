@@ -64,7 +64,22 @@ class CategoryCreateView(LoginRequiredMixin,CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
     def get_success_url(self):
-        return self.request.GET.get(
-            'next',
-            reverse_lazy('task_create')
-        )
+        return self.request.GET.get('next')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title_name'] = 'Создание категории'
+        context['button_text'] = 'Создать'
+        return context
+
+class CategoryUpdateView(LoginRequiredMixin,UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'tasks/category_form.html'
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title_name'] = 'Изменение категории'
+        context['button_text'] = 'Сохранить'
+        return context

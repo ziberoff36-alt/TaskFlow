@@ -12,15 +12,20 @@
   <table>
     <tr>
       <th>Категория</th>
+      <th>Действия</th>
     </tr>
     {% for category in categories %}
     <tr>
       <td>{{category.name}}</td>
+      <td>
+          <a href="{% url 'category_update' category.pk %}">Изменить задачу</a>
+      </td>
     </tr>
     {% endfor %}
   </table>
   {% endif %}
 <a href="{% url 'task_list' %}">В главное меню</a>
+<a href="{% url 'category_create' %}?next={{request.path}}">Создать категорию</a>
 </div>
 </body>
 </html>
