@@ -31,9 +31,6 @@ class TaskUpdateView(LoginRequiredMixin,UpdateView):
     form_class = TaskForm
     template_name = 'tasks/task_form.html'
     success_url = reverse_lazy('task_list')
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
     def get_context_data(self, **kwargs):
@@ -75,11 +72,21 @@ class CategoryUpdateView(LoginRequiredMixin,UpdateView):
     model = Category
     form_class = CategoryForm
     template_name = 'tasks/category_form.html'
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title_name'] = 'Изменение категории'
         context['button_text'] = 'Сохранить'
+        return context
+
+class CategoryDeleteView(LoginRequiredMixin,DeleteView):
+    model = Category
+    template_name = 'tasks/task_delete.html'
+    success_url = reverse_lazy('category_list')
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
+    def get_success_url(self):
+        return self.request.GET.get('next')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['delete_name'] = 'категорию'
         return context

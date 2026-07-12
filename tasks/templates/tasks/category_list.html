@@ -18,7 +18,8 @@
     <tr>
       <td>{{category.name}}</td>
       <td>
-          <a href="{% url 'category_update' category.pk %}">Изменить задачу</a>
+          <a href="{% url 'category_update' category.pk %}">Изменить</a>
+          <a href="{% url 'category_delete' category.pk %}?next={{request.path}}">Удалить</a>
       </td>
     </tr>
     {% endfor %}
