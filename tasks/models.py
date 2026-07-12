@@ -44,4 +44,4 @@ class Task(models.Model):
         related_name='tasks'
     )
     def __str__(self):
-        return f'{self.title}: {self.id} - {self.user.username}'
+        return self.title

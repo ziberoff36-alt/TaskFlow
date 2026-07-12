@@ -7,11 +7,11 @@
     <title>Задачник</title>
 </head>
 <body>
-<h1>Вы уверены, что хотите удалить задачу "{{object.title}}"?</h1>
+<h1>Вы уверены, что хотите удалить {{delete_name}} "{{object}}"?</h1>
 <form method="post">
     {% csrf_token %}
     <button type="submit">Да, удалить окончательно</button>
-    <a href="{% url 'task_list' %}">Отмена</a>
+    <a href="{{request.GET.next}}">Отмена</a>
 </form>
 </body>
 </html>

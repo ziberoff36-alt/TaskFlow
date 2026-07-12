@@ -45,7 +45,12 @@ class TaskDeleteView(LoginRequiredMixin,DeleteView):
     success_url = reverse_lazy('task_list')
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
-
+    def get_success_url(self):
+        return self.request.GET.get('next')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['delete_name'] = 'задачу'
+        return context
 class CategoryListView(LoginRequiredMixin,ListView):
     model = Category
     template_name = 'tasks/category_list.html'
