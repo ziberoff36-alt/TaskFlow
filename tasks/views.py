@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
 from tasks.forms import TaskForm, CategoryForm
 from tasks.models import Task, Category
 
@@ -25,6 +26,20 @@ class TaskCreateView(LoginRequiredMixin,CreateView):
         context['title_name'] = 'Создание задачи'
         context['button_text'] = 'Создать'
         return context
+
+class TaskStatusView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        task = get_object_or_404(
+            Task,
+            pk=pk,
+            user=request.user
+        )
+        if task.status == Task.Status.NEW:
+            task.status = Task.Status.PROGRESS
+        elif task.status == Task.Status.PROGRESS:
+             task.status = Task.Status.DONE
+        task.save()
+        return redirect('task_list')
 
 class TaskUpdateView(LoginRequiredMixin,UpdateView):
     model = Task

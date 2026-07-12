@@ -26,6 +26,17 @@
             <td>{% if task.category %} {{task.category}} {% else %} Без категории {% endif %}</td>
             <td>{{task.created_at|date:'d.m.Y H:i' }}</td>
             <td>
+                {% if task.status == "new" %}
+                    <form method="post" action="{% url 'task_status' task.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">Начать</button>
+                    </form>
+                {% elif task.status == "progress" %}
+                    <form method="post" action="{% url 'task_status' task.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">Завершить</button>
+                    </form>
+                {% endif %}
                 <a href="{% url 'task_update' task.pk %}">Изменить</a>
                 <a href="{% url 'task_delete' task.pk %}?next={{request.path}}">Удалить</a>
             </td>
