@@ -26,7 +26,6 @@ class Task(models.Model):
         PROGRESS = 'progress', 'В процессе'
         DONE = 'done', 'Завершено'
     title = models.CharField(max_length=100)
-    description = models.TextField(blank=True, default='')
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
