@@ -26,6 +26,10 @@ class TaskCreateView(LoginRequiredMixin,CreateView):
         context['title_name'] = 'Создание задачи'
         context['button_text'] = 'Создать'
         return context
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 class TaskStatusView(LoginRequiredMixin, View):
     def post(self, request, pk):
@@ -53,6 +57,10 @@ class TaskUpdateView(LoginRequiredMixin,UpdateView):
         context['title_name'] = 'Изменение задачи'
         context['button_text'] = 'Сохранить'
         return context
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 class TaskDeleteView(LoginRequiredMixin,DeleteView):
     model = Task
@@ -66,6 +74,7 @@ class TaskDeleteView(LoginRequiredMixin,DeleteView):
         context = super().get_context_data(**kwargs)
         context['delete_name'] = 'задачу'
         return context
+
 class CategoryListView(LoginRequiredMixin,ListView):
     model = Category
     template_name = 'tasks/category_list.html'
@@ -92,6 +101,8 @@ class CategoryUpdateView(LoginRequiredMixin,UpdateView):
     model = Category
     form_class = CategoryForm
     template_name = 'tasks/category_form.html'
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title_name'] = 'Изменение категории'

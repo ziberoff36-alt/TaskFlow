@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView
 from tasks.views import TaskListView, TaskCreateView, TaskUpdateView, CategoryCreateView, TaskDeleteView, \
     CategoryListView, CategoryUpdateView, CategoryDeleteView, TaskStatusView
 
@@ -12,4 +13,5 @@ urlpatterns = [
     path('category/create/', CategoryCreateView.as_view(), name='category_create'),
     path('category/<int:pk>/', CategoryUpdateView.as_view(), name='category_update'),
     path('category/delete/<int:pk>/', CategoryDeleteView.as_view(), name='category_delete'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

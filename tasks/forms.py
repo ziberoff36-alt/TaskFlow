@@ -10,9 +10,11 @@ class TaskForm(forms.ModelForm):
             'title': 'Название',
             'category': 'Категория',
         }
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(user=user)
         self.fields['category'].empty_label = 'Не выбрано'
+
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
